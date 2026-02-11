@@ -15,4 +15,6 @@ dependencies = [
     "openai>=1.0.0",
     "pypdf",
     "tiktoken",
+    "markdown>=3.5",
+    "weasyprint>=60.0",
 ]
