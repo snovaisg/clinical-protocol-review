@@ -63,8 +63,14 @@ cd clinical-protocol-review
 
 The setup script installs [uv](https://docs.astral.sh/uv/) (if needed), resolves the correct Python version, and installs all dependencies:
 
+**macOS / Linux:**
 ```bash
-./setup.sh
+./setup_mac_linux.sh
+```
+
+**Windows (PowerShell):**
+```powershell
+.\setup_windows.ps1
 ```
 
 ### 3. Configure Environment Variables
