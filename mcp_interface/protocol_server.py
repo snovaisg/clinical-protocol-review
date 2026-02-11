@@ -1,4 +1,7 @@
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ProtocolServer:
@@ -72,6 +75,6 @@ class ProtocolServer:
         if section_name in self.structured_protocol["sections"]:
             self.structured_protocol["sections"][section_name] = new_content
             # You'd also need logic to regenerate self.protocol_content from self.structured_protocol
-            print(f"Section '{section_name}' updated (in internal representation).")
+            logger.info("Section '%s' updated (in internal representation).", section_name)
         else:
-            print(f"Section '{section_name}' not found for update.")
+            logger.warning("Section '%s' not found for update.", section_name)
