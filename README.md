@@ -2,9 +2,9 @@
 
 ## Overview
 
-This project implements an Agents-powered system for drafting and reviewing clinical trial protocols. Leveraging Large Language Models (LLMs), it facilitates the generation of new protocol drafts and employs a multi-agent review system to identify potential amendment triggers before implementation. The system is designed to provide a structured review process, culminating in a protocol score and actionable recommendations.
+Clinical trial protocols go through multiple rounds of review by different experts — principal investigators, site physicians, regulatory specialists — before they're ready for submission. This process is slow, expensive, and often catches critical issues too late.
 
-The core idea is inspired by the Model Context Protocol (MCP) to enable structured interaction between AI agents and the protocol content, mimicking the collaborative review process of human experts.
+This tool automates that early review process. Upload a protocol draft (or generate one from scratch), and a panel of AI reviewers will analyze it from multiple expert perspectives, flag potential amendment risks, and give you a scored assessment with actionable recommendations — in minutes instead of weeks.
 
 ![Streamlit App UI](media/app-ui.png)
 
