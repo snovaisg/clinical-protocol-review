@@ -2,9 +2,11 @@
 
 ## Overview
 
-This project implements an Agents-powered system for drafting and reviewing clinical trial protocols. Leveraging Large Language Models (LLMs) via LangChain, it facilitates the generation of new protocol drafts and employs a multi-agent review system to identify potential amendment triggers before implementation. The system is designed to provide a structured review process, culminating in a protocol score and actionable recommendations.
+This project implements an Agents-powered system for drafting and reviewing clinical trial protocols. Leveraging Large Language Models (LLMs), it facilitates the generation of new protocol drafts and employs a multi-agent review system to identify potential amendment triggers before implementation. The system is designed to provide a structured review process, culminating in a protocol score and actionable recommendations.
 
 The core idea is inspired by the Model Context Protocol (MCP) to enable structured interaction between AI agents and the protocol content, mimicking the collaborative review process of human experts.
+
+![Streamlit App UI](media/app-ui.png)
 
 ## How It Works
 
@@ -48,43 +50,42 @@ Follow these steps to set up and run the project locally.
 
 ### Prerequisites
 
-* Python 3.8+
 * An OpenAI API Key
 
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/pooja-k-swamy/clinical-protocol-review.git](https://github.com/pooja-k-swamy/clinical-protocol-review.git)
+git clone https://github.com/snovaisg/clinical-protocol-review.git
 cd clinical-protocol-review
 ```
 
-### 2. Create and Activate a Virtual Environment
-Use a virtual environment to manage dependencies
+### 2. Install Dependencies
+
+The setup script installs [uv](https://docs.astral.sh/uv/) (if needed), resolves the correct Python version, and installs all dependencies:
 
 ```bash
-python -m venv venv
+./setup.sh
 ```
 
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+### 3. Configure Environment Variables
 
-### 4. Configure Environment Variables
-Create a .env file in the root directory of your project and add your OpenAI API key:
-```python
+Create a `.env` file in the root directory of your project and add your OpenAI API key:
+
+```
 OPENAI_API_KEY="OPENAI_API_KEY_HERE"
 ```
 
-### 5. Add Protocol Templates
-The templates/ directory is structured for different guideline types. Populate templates/ich_templates/ich_template_v1.md with a basic ICH-compliant markdown protocol structure.
+### 4. Add Protocol Templates (optional)
 
-### 6. Run the Application
-Once all setup steps are complete, run the Streamlit application from the root directory of your project:
+The `templates/` directory is structured for different guideline types. Populate `templates/ich_templates/ich_template_v1.md` with a basic ICH-compliant markdown protocol structure.
+
+### 5. Run the Application
 
 ```bash
-streamlit run streamlit_app.py
+uv run streamlit run streamlit_app.py
 ```
+
+> `uv run` automatically activates the project's virtual environment, so you never need to manually source `.venv/bin/activate`.
 
 
 #### Usage
