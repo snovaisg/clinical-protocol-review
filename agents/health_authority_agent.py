@@ -1,6 +1,6 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from mcp_interface.protocol_server import ProtocolServer
 import os
 
@@ -57,7 +57,7 @@ class HealthAuthorityAgent:
             """,
             input_variables=["protocol_content"]
         )
-        self.chain = LLMChain(llm=self.llm, prompt=self.prompt_template)
+        self.chain = self.prompt_template | self.llm | StrOutputParser()
 
     def review_protocol(self, protocol_server: ProtocolServer) -> str:
         """
@@ -67,8 +67,6 @@ class HealthAuthorityAgent:
         Returns:
             A string containing the health authority's feedback and recommendations.
         """
-        # For section-level summary, we still give the full protocol context for now
-        # but the agent is prompted to focus on certain aspects.
         full_protocol = protocol_server.get_all_content()
-        response = self.chain.run(protocol_content=full_protocol)
+        response = self.chain.invoke({"protocol_content": full_protocol})
         return response

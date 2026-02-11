@@ -1,7 +1,10 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ProtocolGenerator:
@@ -55,7 +58,7 @@ class ProtocolGenerator:
             with open(template_path, 'r') as f:
                 return f.read()
         except FileNotFoundError:
-            print(f"Warning: Template not found at {template_path}. Using default base template.")
+            logger.warning("Template not found at %s. Using default base template.", template_path)
             return self.base_template
 
     def generate_protocol_draft(self, study_title: str, indication: str, objectives: str, template_path: str = None) -> str:
@@ -68,10 +71,10 @@ class ProtocolGenerator:
             template=template,
             input_variables=["study_title", "indication", "objectives"]
         )
-        chain = LLMChain(llm=self.llm, prompt=prompt)
-        response = chain.run(
-            study_title=study_title,
-            indication=indication,
-            objectives=objectives
-        )
+        chain = prompt | self.llm | StrOutputParser()
+        response = chain.invoke({
+            "study_title": study_title,
+            "indication": indication,
+            "objectives": objectives
+        })
         return response
