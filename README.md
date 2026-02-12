@@ -1,3 +1,4 @@
+[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm.svg)](https://huggingface.co/spaces/snovaisg/clinical-protocol-reviewer)
 # Clinical Protocol Reviewer
 
 Clinical trial protocols go through multiple rounds of review by different experts — principal investigators, site physicians, regulatory specialists — before they're ready for submission. This process is slow, expensive, and often catches critical issues too late.
