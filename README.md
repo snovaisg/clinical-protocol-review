@@ -1,6 +1,4 @@
-# Clinical Protocol Draft Assistant
-
-## Overview
+# Clinical Protocol Reviewer
 
 Clinical trial protocols go through multiple rounds of review by different experts — principal investigators, site physicians, regulatory specialists — before they're ready for submission. This process is slow, expensive, and often catches critical issues too late.
 
@@ -12,7 +10,7 @@ This tool automates that early review process. Upload a protocol draft (or gener
 
 The system comprises the following key modules:
 
-1.  **Protocol Generator (`agents/protocol_generator.py`):**
+1.  **Protocol Draft Assistant (`agents/protocol_generator.py`):**
     * Generates initial clinical protocol drafts based on user-defined parameters and predefined templates (e.g., ICH, FDA guidelines).
     * Acts as the initial "Draft Assist" component.
 
