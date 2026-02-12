@@ -16,32 +16,19 @@ The system comprises the following key modules:
     * Generates initial clinical protocol drafts based on user-defined parameters and predefined templates (e.g., ICH, FDA guidelines).
     * Acts as the initial "Draft Assist" component.
 
-2.  **Model Context Protocol (MCP) Interface (`mcp_interface/protocol_server.py`):**
-    * A standardized interface that exposes protocol content in a structured manner to the review agents.
-    * Enables agents to access specific sections of the protocol (e.g., "Study Objectives," "Inclusion Criteria") for targeted review, simulating a more realistic interaction than providing the full text at once.
-    * (Future enhancement: This will be developed to a deeper, more realistic MCP implementation, potentially involving a structured data model for protocols).
-
-3.  **Multi-Agent Review System (`agents/*.py`):**
-    * **Specialized AI Agents:** Multiple agents, each representing a subject matter expert (SME) with a unique perspective, evaluate the protocol.
+2.  **Multi-Agent Review System (`agents/*.py`):**
+    * **Specialized AI Agents:** Multiple agents, each representing a subject matter expert (SME) with a unique perspective, evaluate the protocol:
         * **Principal Investigator (PI) Agent (`agents/pi_agent.py`):** Reviews for scientific rigor, study feasibility, and patient safety from a research leadership perspective.
         * **Site Physician Agent (`agents/site_physician_agent.py`):** Focuses on practical implementation at a clinical site, patient management, and operational challenges.
         * **Health Authority Agent (`agents/health_authority_agent.py`):** Assesses adherence to regulatory guidelines (ICH-GCP, FDA), ethical considerations, and data integrity.
-    * **Agentic AI Framework (LangChain):** Utilizes LangChain for defining agent behavior, enabling multi-step reasoning, planning, and contextual understanding. (Future enhancement: Incorporate Chain-of-Thought, Reflection, and Self-correction for more sophisticated review).
 
-4.  **Amendment Risk Detection & Recommendation (`utils/risk_assessor.py`):**
+3.  **Amendment Risk Detection & Recommendation (`utils/risk_assessor.py`):**
     * Analyzes consolidated feedback from all specialized agents.
     * Identifies potential issues that could lead to protocol amendments.
     * Provides a severity assessment (Low, Medium, High), rationale, and specific recommendations for improvement.
 
-5.  **Scoring Engine (`utils/scoring_engine.py`):**
+4.  **Scoring Engine (`utils/scoring_engine.py`):**
     * Assigns a numerical score to the protocol based on the identified risks and their severity. A higher score indicates fewer or less severe issues.
-
-6.  **Document Processor (`utils/document_processor.py`):**
-    * Handles the extraction of text content from various document formats (e.g., PDF, TXT, MD) uploaded by the user.
-
-7.  **Streamlit Application (`streamlit_app.py`):**
-    * The user-friendly interface for interacting with the system.
-    * Allows users to generate new protocol drafts, upload existing protocols, trigger the multi-agent review, and view the consolidated feedback, risk assessment, and score.
 
 
 ## Setup and Installation
@@ -91,10 +78,9 @@ The `templates/` directory is structured for different guideline types. Populate
 uv run streamlit run streamlit_app.py
 ```
 
-> `uv run` automatically activates the project's virtual environment, so you never need to manually source `.venv/bin/activate`.
-
 
 #### Usage
 1. Generate Protocol Draft: Use the "Protocol Generation" section to input basic study parameters and generate a new protocol draft using an LLM.
 2. Upload Existing Protocol: Upload a protocol file (PDF, TXT, or MD) to be reviewed. The system will extract its text content.
 3. Start Multi-Agent Review: Once a protocol is displayed, click "Start Multi-Agent Review". The specialized AI agents will then process the protocol, provide their feedback, and the system will present an amendment risk assessment, recommendations, and an overall score.
+4. Download Review: Get the review back in markdown and pdf.
