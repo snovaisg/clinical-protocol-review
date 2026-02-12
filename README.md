@@ -83,3 +83,27 @@ uv run streamlit run streamlit_app.py
 2. Upload Existing Protocol: Upload a protocol file (PDF, TXT, or MD) to be reviewed. The system will extract its text content.
 3. Start Multi-Agent Review: Once a protocol is displayed, click "Start Multi-Agent Review". The specialized AI agents will then process the protocol, provide their feedback, and the system will present an amendment risk assessment, recommendations, and an overall score.
 4. Download Review: Get the review back in markdown and pdf.
+
+## Deploying to Hugging Face Spaces
+
+The repo includes `app_hf.py` and `requirements.txt` for deploying to [Hugging Face Spaces](https://huggingface.co/spaces). This variant lets users provide their own OpenAI API key via the sidebar (no `.env` file needed) and downloads reports as a ZIP.
+
+To deploy:
+
+1. Create a new Space on Hugging Face (SDK: **Streamlit**).
+2. In the Space repo, add a `README.md` with the required HF metadata header:
+   ```yaml
+   ---
+   title: Clinical Protocol AI Review
+   emoji: 🧬
+   colorFrom: blue
+   colorTo: green
+   sdk: streamlit
+   sdk_version: "1.30.0"
+   app_file: app_hf.py
+   pinned: false
+   ---
+   ```
+3. Push the project files (including `app_hf.py`, `requirements.txt`, `agents/`, `utils/`, `mcp_interface/`, `templates/`, and `example-protocols/`) to the Space repo.
+4. The Space will install dependencies from `requirements.txt` and launch `app_hf.py` automatically.
+
